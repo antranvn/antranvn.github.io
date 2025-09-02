@@ -7,147 +7,320 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     body {
         font-family: 'Inter', sans-serif;
-        background-color: #f8fafc; /* Light blue-gray background */
-        color: #334155; /* Dark slate text */
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        position: relative;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,117.3C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+        background-size: cover;
+        z-index: -1;
+    }
+    .main-content {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 2rem;
+        margin: 2rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     }
     .app-card {
-        background-color: #ffffff;
-        border-radius: 1.5rem; /* More rounded corners */
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        background: linear-gradient(145deg, #ffffff, #f3f4f6);
+        border-radius: 1.5rem;
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        position: relative;
+        overflow: hidden;
+    }
+    .app-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: left 0.6s;
+    }
+    .app-card:hover::before {
+        left: 100%;
     }
     .app-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.25);
+    }
+    .app-icon {
+        width: 100px;
+        height: 100px;
+        border-radius: 25%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2.5rem;
+        box-shadow: 0 10px 30px -5px rgba(102, 126, 234, 0.4);
+        transition: all 0.3s;
+    }
+    .app-card:hover .app-icon {
+        transform: rotate(5deg) scale(1.1);
     }
     .btn-primary {
-        background-color: #3b82f6; /* Blue-600 */
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        border-radius: 0.75rem; /* Rounded button */
+        border-radius: 0.75rem;
         padding: 0.75rem 1.5rem;
-        transition: background-color 0.3s ease-in-out;
+        transition: all 0.3s ease;
+        display: inline-block;
+        text-decoration: none;
+        font-weight: 500;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
     }
     .btn-primary:hover {
-        background-color: #2563eb; /* Blue-700 */
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+    }
+    .privacy-link {
+        color: #9333ea;
+        text-decoration: none;
+        margin-top: 0.75rem;
+        font-size: 0.875rem;
+        transition: color 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+    .privacy-link:hover {
+        color: #7c3aed;
+        text-decoration: underline;
+    }
+    .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 0 0 3rem 3rem;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: float 20s linear infinite;
+    }
+    @keyframes float {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        100% { transform: translate(-50px, -50px) rotate(360deg); }
+    }
+    .feature-badge {
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    .section-title {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 0.5rem;
+    }
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 2px;
     }
   </style>
 </head>
-<body class="antialiased">
+<body>
 
-<!-- Header -->
-<header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg">
-  <nav class="container mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center">
-    <a href="#" class="text-3xl font-bold rounded-lg px-3 py-2 hover:bg-blue-700 transition duration-300">CoolCool Studio</a>
-    <div class="mt-4 sm:mt-0 space-x-6 text-lg">
-      <a href="#apps" class="hover:text-blue-200 transition duration-300">Apps</a>
-      <a href="#about" class="hover:text-blue-200 transition duration-300">About Us</a>
-      <a href="#contact" class="hover:text-blue-200 transition duration-300">Contact</a>
+<div class="main-content">
+  <!-- Header -->
+  <header class="bg-transparent text-gray-800 px-8 pt-8">
+    <nav class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+      <a href="#" class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">CoolCool Studio</a>
+      <div class="mt-4 sm:mt-0 space-x-6 text-lg">
+        <a href="#apps" class="text-gray-700 hover:text-purple-600 transition duration-300 font-medium">Apps</a>
+        <a href="#about" class="text-gray-700 hover:text-purple-600 transition duration-300 font-medium">About Us</a>
+        <a href="#contact" class="text-gray-700 hover:text-purple-600 transition duration-300 font-medium">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section text-white py-20 px-8 text-center mx-8 mt-8">
+    <div class="container mx-auto relative z-10">
+      <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
+        Innovating Your Android Experience
+      </h1>
+      <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
+        Crafting smart, efficient, and user-friendly mobile applications that make your digital life easier.
+      </p>
+      <a href="#apps" class="btn-primary text-lg font-semibold inline-block">
+        <i class="fas fa-rocket mr-2"></i> Explore Our Apps
+      </a>
     </div>
-  </nav>
-</header>
+  </section>
 
-<!-- Hero Section -->
-<section class="bg-gradient-to-br from-blue-500 to-purple-600 text-white py-20 px-4 text-center rounded-b-3xl shadow-xl mx-auto max-w-7xl mt-8">
-  <div class="container mx-auto">
-    <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-      Innovating Your Android Experience
-    </h1>
-    <p class="text-xl md:text-2xl mb-8 opacity-90">
-      Crafting smart, efficient, and user-friendly mobile applications.
-    </p>
-    <a href="#apps" class="btn-primary text-lg font-semibold inline-block transform hover:scale-105">
-      Explore Our Apps
-    </a>
-  </div>
-</section>
+  <!-- Apps Showcase Section -->
+  <section id="apps" class="py-16 px-8">
+    <div class="container mx-auto">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-800 section-title">Our Applications</h2>
+      <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Discover our collection of powerful Android apps designed to enhance your mobile experience</p>
 
-<!-- Apps Showcase Section -->
-<section id="apps" class="py-16 px-4 bg-gray-50">
-  <div class="container mx-auto">
-    <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Our Applications</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <!-- App Card 1: AI Phone Cleaner -->
+        <div class="app-card p-6 flex flex-col items-center text-center">
+          <span class="feature-badge">Popular</span>
+          <div class="app-icon mb-4">
+            <i class="fas fa-broom"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-3 text-gray-800">AI Phone Cleaner</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed flex-grow">
+            Optimize your phone's performance with AI. Remove duplicates, large files, and blurred photos to free up storage.
+          </p>
+          <a href="https://play.google.com/store/apps/details?id=phone.speedup.aicleaner" target="_blank" class="btn-primary font-medium w-full text-sm">
+            <i class="fab fa-google-play mr-2"></i> Get it on Google Play
+          </a>
+          <a href="https://antranvn.github.io/AIPhoneCleaner/privacy.html" target="_blank" class="privacy-link">
+            <i class="fas fa-shield-alt"></i> Privacy Policy
+          </a>
+        </div>
 
-      <!-- App Card 1: AI Phone Cleaner -->
-      <div class="app-card p-8 flex flex-col items-center text-center">
-        <img src="https://placehold.co/120x120/a8dadc/ffffff?text=AI+Cleaner" alt="AI Phone Cleaner Icon" class="w-32 h-32 rounded-3xl mb-6 shadow-md">
-        <h3 class="text-3xl font-semibold mb-3 text-blue-700">AI Phone Cleaner</h3>
-        <p class="text-gray-600 text-lg mb-6 leading-relaxed">
-          Optimize your phone's performance effortlessly. Intelligently identifies and removes duplicate files, large files, similar photos, blurred photos, and more, freeing up valuable storage space.
-        </p>
-        <a href="https://play.google.com/store/apps/details?id=phone.speedup.aicleaner" target="_blank" class="btn-primary font-medium">
-          Get it on Google Play
-        </a>
-        <a href="https://antranvn.github.io/AIPhoneCleaner/privacy.html" target="_blank" class="privacy-link">
-          Privacy Policy
-        </a>
+        <!-- App Card 2: Focus Reader -->
+        <div class="app-card p-6 flex flex-col items-center text-center">
+          <span class="feature-badge">New</span>
+          <div class="app-icon mb-4">
+            <i class="fas fa-file-pdf"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-3 text-gray-800">Focus Reader</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed flex-grow">
+            All-in-one document reader for PDF, Excel, Word, PowerPoint. Search, bookmark, and manage all your files.
+          </p>
+          <a href="#" class="btn-primary font-medium w-full text-sm">
+            <i class="fab fa-google-play mr-2"></i> Coming Soon
+          </a>
+          <a href="https://antranvn.github.io/FocusReader/privacy.html" target="_blank" class="privacy-link">
+            <i class="fas fa-shield-alt"></i> Privacy Policy
+          </a>
+        </div>
+
+        <!-- App Card 3: SNotes: Speech to Notes -->
+        <div class="app-card p-6 flex flex-col items-center text-center">
+          <div class="app-icon mb-4">
+            <i class="fas fa-microphone"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-3 text-gray-800">SNotes</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed flex-grow">
+            Transform speech into text. Convert voice recordings into accurate, editable notes for meetings and lectures.
+          </p>
+          <a href="https://play.google.com/store/apps/details?id=com.speechnotes.voicenotes" target="_blank" class="btn-primary font-medium w-full text-sm">
+            <i class="fab fa-google-play mr-2"></i> Get it on Google Play
+          </a>
+          <a href="https://antranvn.github.io/SNotes/Snotes_speech_to_text_privacy_policy" target="_blank" class="privacy-link">
+            <i class="fas fa-shield-alt"></i> Privacy Policy
+          </a>
+        </div>
+
+        <!-- App Card 4: Change DNS -->
+        <div class="app-card p-6 flex flex-col items-center text-center">
+          <div class="app-icon mb-4">
+            <i class="fas fa-network-wired"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-3 text-gray-800">Change DNS</h3>
+          <p class="text-gray-600 text-sm mb-6 leading-relaxed flex-grow">
+            Enhance internet security and speed. Switch DNS servers for faster browsing and improved privacy.
+          </p>
+          <a href="https://play.google.com/store/apps/details?id=com.andevstudioth.changedns" target="_blank" class="btn-primary font-medium w-full text-sm">
+            <i class="fab fa-google-play mr-2"></i> Get it on Google Play
+          </a>
+        </div>
+
       </div>
-
-      <!-- App Card 2: SNotes: Speech to Notes -->
-      <div class="app-card p-8 flex flex-col items-center text-center">
-        <img src="https://placehold.co/120x120/a2d2ff/ffffff?text=SNotes" alt="SNotes Icon" class="w-32 h-32 rounded-3xl mb-6 shadow-md">
-        <h3 class="text-3xl font-semibold mb-3 text-indigo-700">SNotes: Speech to Notes</h3>
-        <p class="text-gray-600 text-lg mb-6 leading-relaxed">
-          Transform spoken words into organized text. Convert voice recordings and live speech into accurate, editable notes. Perfect for meetings, lectures, and quick thoughts.
-        </p>
-        <a href="https://play.google.com/store/apps/details?id=com.speechnotes.voicenotes" target="_blank" class="btn-primary font-medium">
-          Get it on Google Play
-        </a>
-        <a href="https://antranvn.github.io/SNotes/Snotes_speech_to_text_privacy_policy" target="_blank" class="privacy-link">
-          Privacy Policy
-        </a>
-      </div>
-
-      <!-- App Card 3: Change DNS -->
-      <div class="app-card p-8 flex flex-col items-center text-center">
-        <img src="https://placehold.co/120x120/cbbdfc/ffffff?text=DNS" alt="Change DNS Icon" class="w-32 h-32 rounded-3xl mb-6 shadow-md">
-        <h3 class="text-3xl font-semibold mb-3 text-purple-700">Change DNS</h3>
-        <p class="text-gray-600 text-lg mb-6 leading-relaxed">
-          Enhance your internet security and speed. Easily switch DNS servers with a single tap for faster browsing, improved privacy, and bypassing geo-restrictions.
-        </p>
-        <a href="https://play.google.com/store/apps/details?id=com.andevstudioth.changedns" target="_blank" class="btn-primary font-medium">
-          Get it on Google Play
-        </a>
-      </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- About Us Section -->
-<section id="about" class="py-16 px-4 bg-blue-100">
-  <div class="container mx-auto text-center">
-    <h2 class="text-4xl font-bold mb-8 text-blue-800">About CoolCool Studio</h2>
-    <p class="text-gray-700 text-lg max-w-3xl mx-auto leading-relaxed">
-      At CoolCool Studio, we are passionate about creating innovative Android applications that solve everyday problems and enhance user experience. Our team of dedicated developers and designers strives to build tools that are not only powerful and efficient but also intuitive and a joy to use. We believe in leveraging cutting-edge technology, like AI, to deliver smart solutions that truly make a difference in your digital life.
-    </p>
-  </div>
-</section>
+  <!-- About Us Section -->
+  <section id="about" class="py-16 px-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl mx-8">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-8 text-gray-800 section-title">About CoolCool Studio</h2>
+      <p class="text-gray-700 text-lg max-w-3xl mx-auto leading-relaxed mb-8">
+        At CoolCool Studio, we are passionate about creating innovative Android applications that solve everyday problems and enhance user experience. Our team of dedicated developers and designers strives to build tools that are not only powerful and efficient but also intuitive and a joy to use.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 max-w-4xl mx-auto">
+        <div class="text-center">
+          <div class="text-4xl text-purple-600 mb-4"><i class="fas fa-users"></i></div>
+          <h3 class="font-semibold text-xl mb-2">User-Focused</h3>
+          <p class="text-gray-600">Every app is designed with our users' needs at the forefront</p>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl text-purple-600 mb-4"><i class="fas fa-rocket"></i></div>
+          <h3 class="font-semibold text-xl mb-2">Innovation</h3>
+          <p class="text-gray-600">Leveraging AI and cutting-edge technology for smart solutions</p>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl text-purple-600 mb-4"><i class="fas fa-shield-alt"></i></div>
+          <h3 class="font-semibold text-xl mb-2">Privacy First</h3>
+          <p class="text-gray-600">Your data stays on your device, always private and secure</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- Contact Section -->
-<section id="contact" class="py-16 px-4 bg-gray-50">
-  <div class="container mx-auto text-center">
-    <h2 class="text-4xl font-bold mb-8 text-gray-800">Get in Touch</h2>
-    <p class="text-gray-700 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
-      Have questions, feedback, or just want to say hello? We'd love to hear from you!
-    </p>
-    <a href="mailto:andevstudioth@gmail.com" class="btn-primary text-lg font-semibold inline-block transform hover:scale-105">
-      Email Us
-    </a>
-    <!-- You can add social media links here if available -->
-  </div>
-</section>
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 px-8">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-8 text-gray-800 section-title">Get in Touch</h2>
+      <p class="text-gray-700 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+        Have questions, feedback, or need support? We're here to help!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="mailto:andevstudioth@gmail.com" class="btn-primary text-lg font-semibold inline-block">
+          <i class="fas fa-envelope mr-2"></i> Email Us
+        </a>
+        <a href="https://play.google.com/store/apps/dev?id=4700903173286756879" target="_blank" class="btn-primary text-lg font-semibold inline-block">
+          <i class="fab fa-google-play mr-2"></i> View All Apps
+        </a>
+      </div>
+    </div>
+  </section>
 
-<!-- Footer -->
-<footer class="bg-gray-800 text-white py-8 px-4 text-center rounded-t-3xl shadow-inner mt-8">
-  <div class="container mx-auto text-sm">
-    <p>&copy; 2025 CoolCool Studio. All rights reserved.</p>
-    <p class="mt-2">Made with <span class="text-red-500">&hearts;</span> for a better Android experience.</p>
-  </div>
-</footer>
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-8 px-8 text-center rounded-t-3xl mt-16">
+    <div class="container mx-auto">
+      <p class="text-lg font-medium">&copy; 2025 CoolCool Studio. All rights reserved.</p>
+      <p class="mt-2 opacity-90">Made with <span class="text-red-300">&hearts;</span> for a better Android experience</p>
+    </div>
+  </footer>
+</div>
 
 </body>
 </html>
